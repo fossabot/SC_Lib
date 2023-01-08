@@ -2,29 +2,8 @@ package com.samplecode.lib
 
 import android.os.Handler
 import android.os.Looper
-import kotlinx.coroutines.*
-
-fun newThread(
-    dispatcher: CoroutineDispatcher = Dispatchers.IO,
-    block: suspend (CoroutineScope) -> Unit,
-): Job {
-    return CoroutineScope(dispatcher).launch {
-        block(this)
-    }
-}
-
-fun newSafeThread(
-    dispatcher: CoroutineDispatcher = Dispatchers.IO,
-    block: suspend (CoroutineScope) -> Unit,
-): Job {
-    return CoroutineScope(dispatcher).launch {
-        try {
-            block(this)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
-}
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 fun postDelay(delay: Long, block: () -> Unit) {
     Handler(Looper.getMainLooper()).postDelayed({
@@ -32,10 +11,8 @@ fun postDelay(delay: Long, block: () -> Unit) {
     }, delay)
 }
 
-suspend fun CoroutineScope.sleep(ms: Long) {
-    if (this.isActive) {
-        withContext(Dispatchers.IO) {
-            Thread.sleep(ms)
-        }
+suspend fun sleep(ms: Long) {
+    withContext(Dispatchers.IO) {
+        Thread.sleep(ms)
     }
 }
