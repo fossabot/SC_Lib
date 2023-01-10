@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import com.samplecode.example.databinding.ActivityMainBinding
 import com.samplecode.lib.*
-import com.samplecode.lib.async.AsyncActivity
+import com.samplecode.lib.async.kotlin.AsyncActivity
 import com.samplecode.lib.states.FlowStateImpl
 import com.samplecode.lib.states.toState
 import com.samplecode.lib.styles.applyStyle

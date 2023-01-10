@@ -1,4 +1,4 @@
-package com.samplecode.lib.async
+package com.samplecode.lib.async.kotlin
 
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.CoroutineDispatcher

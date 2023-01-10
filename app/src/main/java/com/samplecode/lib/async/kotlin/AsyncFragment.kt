@@ -1,4 +1,4 @@
-package com.samplecode.lib.async
+package com.samplecode.lib.async.kotlin
 
 import androidx.fragment.app.Fragment
 import kotlinx.coroutines.CoroutineDispatcher

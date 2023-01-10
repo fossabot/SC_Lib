@@ -1,4 +1,4 @@
-package com.samplecode.lib.async
+package com.samplecode.lib.async.kotlin
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope

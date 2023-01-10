@@ -1,4 +1,4 @@
-package com.samplecode.lib.java.async;
+package com.samplecode.lib.async.java;
 
 import java.util.ArrayList;
 

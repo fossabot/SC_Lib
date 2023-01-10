@@ -1,12 +1,19 @@
-package com.samplecode.lib.java.async;
+package com.samplecode.lib.async.java;
 
-import androidx.fragment.app.Fragment;
+import android.os.Build;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.samplecode.lib.KotlinJavaExtensionsKt;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.io.Serializable;
+
 import kotlinx.coroutines.Job;
 
-public abstract class AsyncFragmentJ extends Fragment implements AsyncImplJ {
+public abstract class AsyncActivityJ extends AppCompatActivity implements AsyncImplJ {
 
     @Override
     public void newThread(Runnable runnable) {
@@ -19,6 +26,24 @@ public abstract class AsyncFragmentJ extends Fragment implements AsyncImplJ {
             }
         });
         jobs.add(job);
+    }
+
+    @SuppressWarnings({"unchecked", "deprecation"})
+    @Nullable
+    public <T extends Serializable> T getSerializeExtraOrNull(@NotNull String name, @NotNull Class<T> data) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            return this.getIntent().getSerializableExtra(name, data);
+        }
+        return (T) this.getIntent().getSerializableExtra(name);
+    }
+
+    @NotNull
+    public <T extends Serializable> T getSerializeExtra(@NotNull String name, @NotNull Class<T> data, @NotNull T defaultValue) {
+        T res = getSerializeExtraOrNull(name, data);
+        if (res != null) {
+            return res;
+        }
+        return defaultValue;
     }
 
     @Override
@@ -50,7 +75,7 @@ public abstract class AsyncFragmentJ extends Fragment implements AsyncImplJ {
     }
 
     @Override
-    public void onDestroy() {
+    protected void onDestroy() {
         clearJobs();
         super.onDestroy();
     }

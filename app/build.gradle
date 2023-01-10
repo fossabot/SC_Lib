@@ -4,6 +4,17 @@ plugins {
     id 'maven-publish'
 }
 
+ext {
+    // group id
+    PUBLISH_GROUP_ID = 'io.github.danilerofei'
+    // текущая версия библиотеки
+    PUBLISH_VERSION = '0.0.1'
+    // artifact id библиотеки
+    PUBLISH_ARTIFACT_ID = 'SC-lib'
+}
+
+apply from: "${rootProject.projectDir}/scripts/publish-module.gradle"
+
 android {
     namespace 'com.samplecode.lib'
     compileSdk 33
@@ -29,6 +40,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11.toString()
+    }
+    buildFeatures {
+        viewBinding true
     }
 }
 
