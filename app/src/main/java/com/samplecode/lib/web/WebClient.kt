@@ -16,9 +16,6 @@ class WebClient {
 
     companion object {
 
-        @JvmField
-        var JSON = "application/json; charset=utf-8".toMediaType()
-
         @Volatile
         private var INSTANCE: WebClient? = null
 
@@ -72,7 +69,7 @@ class WebClient {
      * @param body Тело
      */
     fun postJson(url: String, body: String): String? {
-        return post(url, body, JSON)
+        return post(url, body, "application/json; charset=utf-8".toMediaType())
     }
 
     /**
