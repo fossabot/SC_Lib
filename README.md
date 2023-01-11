@@ -14,9 +14,7 @@ textView.setText(spanText);
 ```kotlin
 val textView = findViewById<TextView>(R.id.textView)
 textView.applyStyle {
-    textView.applyStyle {
-        bold()
-    }
+    bold()
 }
 ```
 Список методов [StyleableText](/app/src/main/java/com/samplecode/lib/styles/StyleableText.kt):
