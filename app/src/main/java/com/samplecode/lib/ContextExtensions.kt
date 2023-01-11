@@ -10,6 +10,9 @@ fun Context?.showToast(
     autoConfigLength: Boolean = true,
     duration: Int = Toast.LENGTH_SHORT
 ) {
+    if (this == null) {
+        return
+    }
     val length = if (autoConfigLength) {
         if (message.length > 45) {
             Toast.LENGTH_LONG
