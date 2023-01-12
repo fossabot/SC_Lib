@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">SC_Lib</string>
+    <public name="lib_app_name" type="string"/>
+    <public name="lib_public_string" type="string"/>
 </resources>

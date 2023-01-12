@@ -1,5 +1,6 @@
 package com.samplecode.lib.utils
 
+import android.app.PendingIntent
 import android.content.Context
 import androidx.annotation.DrawableRes
 import androidx.core.app.NotificationChannelCompat
@@ -15,11 +16,17 @@ class NotificationUtils private constructor(context: Context) {
         @Volatile
         private var INSTANCE: NotificationUtils? = null
 
+        @JvmStatic
         fun getInstance(context: Context): NotificationUtils {
             return INSTANCE ?: synchronized(this) {
                 INSTANCE = NotificationUtils(context)
                 INSTANCE!!
             }
+        }
+
+        @JvmStatic
+        fun create(context: Context): NotificationUtils {
+            return NotificationUtils(context)
         }
     }
 
@@ -39,7 +46,7 @@ class NotificationUtils private constructor(context: Context) {
         createChannel(
             channelId = channelId,
             importance = newImportance,
-            channelName = channel.name?.toString(),
+            channelName = channel.name?.toString() ?: "",
             channelDescription = channel.description,
             groupId = channel.group
         )
@@ -54,9 +61,10 @@ class NotificationUtils private constructor(context: Context) {
         notificationManager.createNotificationChannelGroup(group)
     }
 
+    @JvmOverloads
     fun createChannel(
         channelId: String,
-        channelName: String? = null,
+        channelName: String,
         channelDescription: String? = null,
         groupId: String? = null,
         importance: Int = NotificationManagerCompat.IMPORTANCE_DEFAULT
@@ -70,19 +78,30 @@ class NotificationUtils private constructor(context: Context) {
         notificationManager.createNotificationChannel(channel)
     }
 
+    @JvmOverloads
     fun showNotification(
         channelId: String,
         title: String,
         message: String,
         @DrawableRes icon: Int,
-        id: Int = Random.nextInt(0, 5000)
+        id: Int = Random.nextInt(0, 5000),
+        autoCancel: Boolean = true,
+        contentIntent: PendingIntent? = null,
+        timeWhen: Long = -1
     ) {
-        val notification = notificationBuilder.apply {
-            setChannelId(channelId)
-            setContentTitle(title)
-            setContentText(message)
-            setSmallIcon(icon)
-        }.build()
-        notificationManager.notify(id, notification)
+        val builder = notificationBuilder
+        builder.setChannelId(channelId)
+        builder.setContentTitle(title)
+        builder.setContentText(message)
+        builder.setSmallIcon(icon)
+        builder.setAutoCancel(autoCancel)
+        if (contentIntent != null) {
+            builder.setContentIntent(contentIntent)
+        }
+        if (timeWhen > 0) {
+            builder.setWhen(timeWhen)
+        }
+
+        notificationManager.notify(id, builder.build())
     }
 }
