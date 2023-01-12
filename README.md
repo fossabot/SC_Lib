@@ -1,4 +1,6 @@
 # SC_Lib
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fdanilerofei%2FSC_Lib.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fdanilerofei%2FSC_Lib?ref=badge_shield)
+
 
 ## Применение стилей к тексту
 
@@ -24,3 +26,7 @@ textView.applyStyle {
 - underline (подчеркнутый текст)
 - addStyle (добавляет [кастомный стиль](https://developer.android.com/guide/topics/resources/string-resource#StylingWithHTML))
 
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fdanilerofei%2FSC_Lib.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fdanilerofei%2FSC_Lib?ref=badge_large)
